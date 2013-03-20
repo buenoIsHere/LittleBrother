@@ -20,6 +20,7 @@
 @synthesize playButton;
 @synthesize recordButton;
 @synthesize stopButton;
+@synthesize recordSettings;
 
 - (void)viewDidLoad
 {
@@ -27,40 +28,19 @@
     playButton.enabled = NO;
     stopButton.enabled = NO;
     
-    NSArray *dirPaths;
-    NSString *docsDir;
+    recordSettings = [NSDictionary 
+                      dictionaryWithObjectsAndKeys:
+                      [NSNumber numberWithInt:AVAudioQualityMin],
+                      AVEncoderAudioQualityKey,
+                      [NSNumber numberWithInt:16], 
+                      AVEncoderBitRateKey,
+                      [NSNumber numberWithInt: 2], 
+                      AVNumberOfChannelsKey,
+                      [NSNumber numberWithFloat:44100.0], 
+                      AVSampleRateKey,
+                      nil];
     
-    //Getting the documents directory
-    dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    docsDir = [dirPaths objectAtIndex:0];
-    NSString *soundFilePath = [docsDir
-                               stringByAppendingPathComponent:@"sound.caf"];
-    
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
-    
-    NSDictionary *recordSettings = [NSDictionary 
-                                    dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:AVAudioQualityMin],
-                                    AVEncoderAudioQualityKey,
-                                    [NSNumber numberWithInt:16], 
-                                    AVEncoderBitRateKey,
-                                    [NSNumber numberWithInt: 2], 
-                                    AVNumberOfChannelsKey,
-                                    [NSNumber numberWithFloat:44100.0], 
-                                    AVSampleRateKey,
-                                    nil];
-    
-    NSError *error = nil;
-    
-    audioRecorder = [[AVAudioRecorder alloc] initWithURL:soundFileURL settings:recordSettings error:&error];
-    
-    if (error)
-    {
-        NSLog(@"error: %@", [error localizedDescription]);
-    } else {
-        [audioRecorder prepareToRecord];
-    }
-	// Do any additional setup after loading the view, typically from a nib.
+    	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)viewDidUnload
@@ -80,10 +60,43 @@
 
 
 - (IBAction)recordPress:(UIButton *)sender {
+
     if (!audioRecorder.recording)
     {
         playButton.enabled = NO;
         stopButton.enabled = YES;
+        
+        NSDate *today = [NSDate date];
+        
+        NSDateFormatter *inFormat = [[NSDateFormatter alloc] init];
+        [inFormat setDateFormat: @"YY-MM-DD-hh:mm:ss"];
+        
+        NSString *timestamp = [inFormat stringFromDate:today];
+        
+        
+        //Getting the documents directory
+        NSString *docPath = [ViewController documentsPath ];
+        NSString *folderPath = [docPath stringByAppendingPathComponent: timestamp];
+        NSString *soundFilePath = [folderPath stringByAppendingPathComponent:@"sound.caf"];
+        
+        
+        if(![[NSFileManager defaultManager] createDirectoryAtPath: folderPath withIntermediateDirectories: NO attributes:nil error: nil])
+            NSLog(@"Error: Couldn't create folder %@", docPath);
+        
+        NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+        
+        NSError *error = nil;
+        
+        audioRecorder = [[AVAudioRecorder alloc] initWithURL:soundFileURL settings:recordSettings error:&error];
+        audioRecorder.delegate = self;
+        
+        if (error)
+        {
+            NSLog(@"error: %@", [error localizedDescription]);
+        } else {
+            [audioRecorder prepareToRecord];
+        }
+
         [audioRecorder record];
     }
 }
@@ -136,11 +149,22 @@
 
 -(void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag
 {
+    NSArray *paths = [[NSFileManager defaultManager] subpathsAtPath:[ViewController documentsPath]];
+    for(NSString *p in paths)
+    {
+        NSLog(@"%@",p);
+    }
 }
 
 -(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error
 {
     NSLog(@"Encode Error occurred");
+}
+
++ (NSString *)documentsPath {
+    NSArray *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *path = [dirPaths objectAtIndex:0];
+    return path;
 }
 
 @end

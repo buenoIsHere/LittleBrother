@@ -16,11 +16,14 @@
 @property (nonatomic, retain) IBOutlet UIButton *playButton; //Refers to the play button in the UI
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
+@property    NSDictionary *recordSettings;
 
 - (IBAction)recordPress:(UIButton *)sender; //What is done when a button is pressed
 
 - (IBAction)playPress:(UIButton *)sender;
 
 - (IBAction)stopPress:(UIButton *)sender;
+
++ (NSString *)documentsPath;
 
 @end
