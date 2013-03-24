@@ -10,6 +10,11 @@
 
 #import "AppDelegate.h"
 
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <CoreLocation/CoreLocation.h>
+#endif
+
 int main(int argc, char *argv[])
 {
     @autoreleasepool {

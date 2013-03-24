@@ -18,6 +18,8 @@
 		348CC4CF16F9F2D200E2CFAC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 348CC4CE16F9F2D200E2CFAC /* ViewController.m */; };
 		348CC4D916F9F72100E2CFAC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348CC4D816F9F72100E2CFAC /* MapKit.framework */; };
 		348CC4DB16FA060100E2CFAC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348CC4DA16FA060100E2CFAC /* AVFoundation.framework */; };
+		BE28618F16FE3CB200F70D37 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE28618E16FE3CB200F70D37 /* CoreLocation.framework */; };
+		BE2861A416FE3F4400F70D37 /* MyCLController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2861A316FE3F4400F70D37 /* MyCLController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +39,9 @@
 		348CC4CE16F9F2D200E2CFAC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		348CC4D816F9F72100E2CFAC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		348CC4DA16FA060100E2CFAC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BE28618E16FE3CB200F70D37 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		BE2861A216FE3F4400F70D37 /* MyCLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCLController.h; sourceTree = "<group>"; };
+		BE2861A316FE3F4400F70D37 /* MyCLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCLController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE28618F16FE3CB200F70D37 /* CoreLocation.framework in Frameworks */,
 				348CC4DB16FA060100E2CFAC /* AVFoundation.framework in Frameworks */,
 				348CC4D916F9F72100E2CFAC /* MapKit.framework in Frameworks */,
 				348CC4B616F9F2D200E2CFAC /* UIKit.framework in Frameworks */,
@@ -75,6 +81,7 @@
 		348CC4B416F9F2D200E2CFAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE28618E16FE3CB200F70D37 /* CoreLocation.framework */,
 				348CC4DA16FA060100E2CFAC /* AVFoundation.framework */,
 				348CC4D816F9F72100E2CFAC /* MapKit.framework */,
 				348CC4B516F9F2D200E2CFAC /* UIKit.framework */,
@@ -93,6 +100,8 @@
 				348CC4CA16F9F2D200E2CFAC /* MainStoryboard_iPad.storyboard */,
 				348CC4CD16F9F2D200E2CFAC /* ViewController.h */,
 				348CC4CE16F9F2D200E2CFAC /* ViewController.m */,
+				BE2861A216FE3F4400F70D37 /* MyCLController.h */,
+				BE2861A316FE3F4400F70D37 /* MyCLController.m */,
 				348CC4BC16F9F2D200E2CFAC /* Supporting Files */,
 			);
 			path = AndrewTest;
@@ -175,6 +184,7 @@
 				348CC4C216F9F2D200E2CFAC /* main.m in Sources */,
 				348CC4C616F9F2D200E2CFAC /* AppDelegate.m in Sources */,
 				348CC4CF16F9F2D200E2CFAC /* ViewController.m in Sources */,
+				BE2861A416FE3F4400F70D37 /* MyCLController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +306,7 @@
 				348CC4D416F9F2D200E2CFAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
