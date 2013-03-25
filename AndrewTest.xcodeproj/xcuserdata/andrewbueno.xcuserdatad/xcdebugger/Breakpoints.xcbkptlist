@@ -8,38 +8,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "AndrewTest/ViewController.m"
-         timestampString = "385491193.755168"
+         timestampString = "385862336.936095"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "64"
-         endingLineNumber = "64"
-         landmarkName = "-recordPress:"
-         landmarkType = "5">
+         startingLineNumber = "65"
+         endingLineNumber = "65"
+         landmarkName = "@implementation ViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "AndrewTest/ViewController.m"
-         timestampString = "385491461.823586"
+         timestampString = "385862336.936095"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "166"
-         endingLineNumber = "166"
-         landmarkName = "+documentsPath"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "AndrewTest/ViewController.m"
-         timestampString = "385491582.541629"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "152"
-         endingLineNumber = "152"
-         landmarkName = "-audioRecorderDidFinishRecording:successfully:"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "-recordPress:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

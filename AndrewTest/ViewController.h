@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "MyCLController.h"
+#import "WebServer.h"
 
 @interface ViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate, MyCLControllerDelegate> {
     MyCLController *locationController;
@@ -17,6 +18,9 @@
     NSString *coordTxt; //Text to be displayed
     NSString *folderPath; //Current directory being saved to
     BOOL recordGPS;
+    
+    NSMutableArray *latLongCoords;
+    NSMutableArray *coordTimes;
 }
 
 
@@ -26,8 +30,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *recordButton;
 @property (nonatomic, retain) IBOutlet UIButton *stopButton;
 @property NSDictionary *recordSettings;
-@property NSMutableArray *latLongCoords;
-@property NSMutableArray *coordTimes;
+@property WebServer *server;
+@property (weak, nonatomic) IBOutlet UILabel *serverAddressLabel;
 
 
 - (IBAction)recordPress:(UIButton *)sender; //What is done when a button is pressed
@@ -39,5 +43,8 @@
 + (NSString *)documentsPath;
 
 - (void) saveToPlist;
+
+- (IBAction)toggleServer:(UISwitch*)sender;
+
 
 @end

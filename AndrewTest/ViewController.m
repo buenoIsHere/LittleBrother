@@ -22,8 +22,8 @@
 @synthesize stopButton;
 @synthesize recordSettings;
 
-@synthesize latLongCoords;
-@synthesize coordTimes;
+@synthesize server;
+@synthesize serverAddressLabel;
 
 - (void)viewDidLoad
 {
@@ -57,7 +57,8 @@
     
     //That said, we don't want to actually record data until record is pressed
     recordGPS = NO;
-
+    
+    server = [[WebServer alloc] init];
 }
 
 //- (void)viewDidUnload
@@ -95,13 +96,14 @@
 }
 
 - (void) saveToPlist{
+    
     NSDictionary *dict;
     
     NSDate *currentTime = [NSDate date];
     NSTimeInterval coordTime = [currentTime timeIntervalSince1970];
     
     [latLongCoords addObject:coordTxt];
-    [coordTimes addObject: [NSString stringWithFormat:@"%d",[NSNumber numberWithDouble:coordTime]]];
+    [coordTimes addObject: [NSString stringWithFormat:@"%f",coordTime]];
     
     dict = [NSDictionary dictionaryWithObjects:latLongCoords forKeys:coordTimes];
     
@@ -116,9 +118,23 @@
     [plist writeToURL:plistFileURL atomically:YES];
 }
 
+- (IBAction)toggleServer:(UISwitch*)sender {
+    
+    if(sender.isOn)
+    {
+        [server start];
+        serverAddressLabel.text = [NSString stringWithFormat:@"%@:%d", [WebServer wifiInterfaceAddress], server.port];
+    }
+    else
+    {
+        [server stop];
+    }
+}
+
 
 //In case there is an error from MyCLController
 - (void)locationError:(NSError *)error {
+    
     coordDisplay.text = [error description];
 }
 
@@ -130,7 +146,6 @@
         //This is so time/GPS data is also recorded
         recordGPS = YES;
         
-        //We can stop recording, but certainly can't play during it!
         playButton.enabled = NO;
         stopButton.enabled = YES;
         
@@ -174,9 +189,9 @@
 
 //What happens when "play" is pressed.
 - (IBAction)playPress:(UIButton *)sender {
+    
     if (!audioRecorder.recording)
     {
-        //We can stop but can't record while playing!
         stopButton.enabled = YES;
         recordButton.enabled = NO;
         
@@ -208,7 +223,6 @@
     
     recordGPS = NO;
     
-    //We only want to be able to play or record, and stop only once!
     stopButton.enabled = NO;
     playButton.enabled = YES;
     recordButton.enabled = YES;
@@ -267,7 +281,12 @@
 -(void)dealloc {
     //[locationController release];
     //[super dealloc];
+    [server stop];
     
 }
 
+- (void)viewDidUnload {
+    [self setServerAddressLabel:nil];
+    [super viewDidUnload];
+}
 @end
